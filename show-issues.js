@@ -18,6 +18,8 @@ function main() {
                 oldest = result.oldest;
         }
 
+        if (total == 0)
+            console.log("\n" + header + ":")
         console.log("\n              Total: " + total);
         console.log("             Oldest: " + oldest.toISOString());
     }
