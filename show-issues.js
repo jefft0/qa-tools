@@ -158,6 +158,8 @@ function showIssues(repo, header) {
             console.log("  WARNING: non-bug #" + issue.number + " has the 'verified' label");
         if (isApproved && !isFeatureRequest)
             console.log("  WARNING: non-feature request #" + issue.number + " has the 'approved' label");
+        if (showHasDevFocus && !isPullRequest && issue.assignees.length > 1)
+            console.log("  WARNING: #" + issue.number + " is assigned to multiple devs: " + issue.assignees.length);
     }
 
     return { total: total, oldest: oldest}
