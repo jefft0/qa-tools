@@ -139,7 +139,7 @@ function showIssues(repo, header) {
             category = isApproved ? "appf" : "feat";
         else if (isQuestion)
             category = "ques";
-        console.log(daysRemaining + category + " " + url + 
+        console.log(daysRemaining + category + " " + url + " ".repeat(4 - ("" + issue.number).length) +
                     (isPullRequest ? "   " : " ") + createdAt.toISOString() + " " + issue.comments + " comments, " +
                     user + ", " + issue.title);
         if (assignee && !staff.includes(assignee))
