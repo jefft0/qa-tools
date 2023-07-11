@@ -5,7 +5,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
-    const repos = ["berty", "weshnet", "go-orbit-db", "go-ipfs-log", "gomobile-ipfs", "www.berty.tech", "www.wesh.network"];
+    const repos = ["berty", "weshnet", "weshnet-expo", "go-orbit-db", "go-ipfs-log", "gomobile-ipfs", "www.berty.tech", "www.wesh.network"];
 
     for (const header of headers) {
         let total = 0;

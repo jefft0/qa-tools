@@ -5,6 +5,9 @@ curl "https://api.github.com/repos/berty/berty/pulls?per_page=100&page=1" >  ber
 curl "https://api.github.com/repos/berty/weshnet/issues?per_page=100&page=1" > weshnet.issues.json
 curl "https://api.github.com/repos/berty/weshnet/pulls?per_page=100&page=1" > weshnet.pulls.json
 
+curl "https://api.github.com/repos/berty/weshnet-expo/issues?per_page=100&page=1" > weshnet-expo.issues.json
+curl "https://api.github.com/repos/berty/weshnet-expo/pulls?per_page=100&page=1" > weshnet-expo.pulls.json
+
 curl "https://api.github.com/repos/berty/go-orbit-db/issues?per_page=100&page=1" > go-orbit-db.issues.json
 curl "https://api.github.com/repos/berty/go-orbit-db/pulls?per_page=100&page=1" > go-orbit-db.pulls.json
 
