@@ -162,6 +162,10 @@ function showIssues(repo, header) {
             console.log("  WARNING: non-feature request #" + issue.number + " has the 'approved' label");
         if (showHasDevFocus && !isPullRequest && issue.assignees.length > 1)
             console.log("  WARNING: #" + issue.number + " is assigned to multiple devs: " + issue.assignees.length);
+        if (isPullRequest && pull.requested_reviewers.length > 1)
+            console.log("  WARNING: PR #" + issue.number + " has multiple reviewers: " + pull.requested_reviewers.length);
+        if (isPullRequest && pull.requested_teams.length > 0)
+            console.log("  WARNING: PR #" + issue.number + " has a team as a reviewer");
     }
 
     return { total: total, oldest: oldest}
