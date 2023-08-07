@@ -166,6 +166,8 @@ function showIssues(repo, header) {
             console.log("  WARNING: PR #" + issue.number + " has multiple reviewers: " + pull.requested_reviewers.length);
         if (isPullRequest && pull.requested_teams.length > 0)
             console.log("  WARNING: PR #" + issue.number + " has a team as a reviewer");
+        if (isPullRequest && isBacklog)
+            console.log("  WARNING: PR #" + issue.number + " has the 'backlog' label");
     }
 
     return { total: total, oldest: oldest}
