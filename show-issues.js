@@ -168,6 +168,8 @@ function showIssues(repo, header) {
             console.log("  WARNING: PR #" + issue.number + " has a team as a reviewer");
         if (isPullRequest && isBacklog)
             console.log("  WARNING: PR #" + issue.number + " has the 'backlog' label");
+        if (isPullRequest && isBug)
+            console.log("  WARNING: PR #" + issue.number + " has the 'bug' label");
     }
 
     return { total: total, oldest: oldest}
