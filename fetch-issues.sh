@@ -20,6 +20,9 @@ curl "https://api.github.com/repos/berty/go-ipfs-log/pulls?per_page=100&page=1" 
 curl "https://api.github.com/repos/ipfs-shipyard/gomobile-ipfs/issues?per_page=100&page=1" >  gomobile-ipfs.issues.json
 curl "https://api.github.com/repos/ipfs-shipyard/gomobile-ipfs/pulls?per_page=100&page=1" >  gomobile-ipfs.pulls.json
 
+curl "https://api.github.com/repos/gnolang/gnomobile/issues?per_page=100&page=1" >  gnomobile.issues.json
+curl "https://api.github.com/repos/gnolang/gnomobile/pulls?per_page=100&page=1" >  gnomobile.pulls.json
+
 curl "https://api.github.com/repos/berty/www.berty.tech/issues?per_page=100&page=1" > www.berty.tech.issues.json
 curl "https://api.github.com/repos/berty/www.berty.tech/pulls?per_page=100&page=1" > www.berty.tech.pulls.json
 
