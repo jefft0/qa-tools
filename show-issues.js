@@ -81,7 +81,7 @@ function showIssues(repo, header) {
         const isApproved = hasLabel(issue, "✅ Approved");
         const isVerified = hasLabel(issue, "verified");
         const isMoreInfoNeeded = hasLabel(issue, "more info needed");
-        const url = "https://github.com/" + (repo == "gomobile-ipfs" ? "ipfs-shipyard" : (repo == "gnomobile" ? "gnolang" : "berty")) + "/" + repo +
+        const url = "https://github.com/" + (repo == "gomobile-ipfs" ? "ipfs-shipyard" : (repo == "gnonative" || repo == "gnosocial" ? "gnolang" : "berty")) + "/" + repo +
             (isPullRequest ? "/pull/" : "/issues/") + issue.number;
 
         const user = issue.user.login;
