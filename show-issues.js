@@ -121,6 +121,22 @@ function showIssues(repo, header) {
             }
         }
 
+        let category = "    ";
+        if (isPullRequest)
+            category = "pull";
+        else if (isBug)
+            category = isVerified ? "vbug" : "bug ";
+        else if (isFeatureRequest)
+            category = isApproved ? "appf" : "feat";
+        else if (isQuestion)
+            category = "ques";
+
+        if (category == "    " && (hasLabel(issue, "Feature") || 
+                                   hasLabel(issue, ":microscope: R&D Study") ||
+                                   hasLabel(issue, "Toolkit")))
+          // Don't show GitHub Project tracking issues.
+          continue;
+
         ++total;
 
         if (!showedHeader) {
@@ -133,15 +149,6 @@ function showIssues(repo, header) {
 
         // Wait until 21 days pass for a response.
         const daysRemaining = (isMoreInfoNeeded ? String(Math.max(0, Math.ceil(21 - daysSinceUpdate))).padStart(2, '0') + "d " : "")
-        let category = "    ";
-        if (isPullRequest)
-            category = "pull";
-        else if (isBug)
-            category = isVerified ? "vbug" : "bug ";
-        else if (isFeatureRequest)
-            category = isApproved ? "appf" : "feat";
-        else if (isQuestion)
-            category = "ques";
         console.log(daysRemaining + category + " " + url + " ".repeat(4 - ("" + issue.number).length) +
                     (isPullRequest ? "   " : " ") + createdAt.toISOString() + " " + issue.comments + " comments, " +
                     user + ", " + issue.title);
