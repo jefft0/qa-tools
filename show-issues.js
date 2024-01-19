@@ -132,7 +132,7 @@ function showIssues(repo, header) {
             category = "ques";
 
         if (category == "    " && (hasLabel(issue, "Feature") || 
-                                   hasLabel(issue, ":microscope: R&D Study") ||
+                                   hasLabel(issue, "🔬 R&D Study") ||
                                    hasLabel(issue, "Toolkit")))
           // Don't show GitHub Project tracking issues.
           continue;
@@ -193,7 +193,7 @@ function getPull(pulls, number) {
 }
 
 function hasLabel(issue, labelName) {
-  for (label of issue.labels) {
+  for (const label of issue.labels) {
       if (label.name == labelName)
           return true;
   }
