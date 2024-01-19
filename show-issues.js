@@ -178,6 +178,8 @@ function showIssues(repo, header) {
             console.log("  WARNING: PR #" + issue.number + " has the 'backlog' label");
         if (isPullRequest && isBug)
             console.log("  WARNING: PR #" + issue.number + " has the 'bug' label");
+        if (category == "    ")
+            console.log("  WARNING: issue/PR #" + issue.number + " doesn't have a label for 'bug', 'question', etc.");
     }
 
     return { total: total, oldest: oldest}
