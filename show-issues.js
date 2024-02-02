@@ -5,8 +5,8 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
-    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "gomobile-ipfs",
-                   "gnonative", "gnosocial", "www.berty.tech", "www.wesh.network"];
+    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log",
+                   "gnonative", "gnosocial", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
 
     for (const header of headers) {
         let total = 0;
