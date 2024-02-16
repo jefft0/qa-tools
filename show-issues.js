@@ -88,9 +88,6 @@ function showIssues(repo, header) {
         const createdAt = new Date(issue.created_at);
         const updatedAt = new Date(issue.updated_at);
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
-        if (repo == "www.berty.tech" && issue.number == 9)
-            // temporary
-            daysSinceUpdate += 7
         const assignee = (issue.assignee ? issue.assignee.login : null);
 
         let pull = null;
@@ -150,8 +147,9 @@ function showIssues(repo, header) {
         // Wait until 21 days pass for a response.
         const daysRemaining = (isMoreInfoNeeded ? String(Math.max(0, Math.ceil(21 - daysSinceUpdate))).padStart(2, '0') + "d " : "")
         console.log(daysRemaining + category + " " + url + " ".repeat(4 - ("" + issue.number).length) +
-                    (isPullRequest ? "   " : " ") + createdAt.toISOString() + " " + issue.comments + " comments, " +
-                    user + ", " + issue.title);
+                    (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
+                    String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
+                    issue.comments + " cmts, " + user + ", " + issue.title);
         if (assignee && !staff.includes(assignee))
           console.log("  WARNING: #" + issue.number + " is assigned to non staff member " + assignee);
         if (showBacklogOrDraft) {
