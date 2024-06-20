@@ -128,7 +128,8 @@ function showIssues(repo, header) {
         else if (isQuestion)
             category = "ques";
 
-        if (category == "    " && (hasLabel(issue, "Feature") || 
+        if (category == "    " && (hasLabel(issue, "Feature") ||
+                                   hasLabel(issue, "chore") ||
                                    hasLabel(issue, "🔬 R&D Study") ||
                                    hasLabel(issue, "Toolkit")))
           // Don't show GitHub Project tracking issues.
