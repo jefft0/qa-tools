@@ -6,7 +6,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
     const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log",
-                   "gnonative", "dsocial", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
+                   "gnonative", "gnokey-mobile", "dsocial", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
 
     for (const header of headers) {
         let total = 0;
@@ -81,8 +81,9 @@ function showIssues(repo, header) {
         const isApproved = hasLabel(issue, "✅ Approved");
         const isVerified = hasLabel(issue, "verified");
         const isMoreInfoNeeded = hasLabel(issue, "more info needed");
-        const url = "https://github.com/" + (repo == "gomobile-ipfs" ? "ipfs-shipyard" : (repo == "gnonative" || repo == "dsocial" ? "gnolang" : "berty")) + "/" + repo +
-            (isPullRequest ? "/pull/" : "/issues/") + issue.number;
+        const url = "https://github.com/" + 
+            (repo == "gomobile-ipfs" ? "ipfs-shipyard" : (repo == "gnonative" || repo == "gnokey-mobile" || repo == "dsocial" ? "gnolang" : "berty")) + 
+            "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
 
         const user = issue.user.login;
         const createdAt = new Date(issue.created_at);
