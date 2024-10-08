@@ -2,7 +2,10 @@ const fs = require('fs');
 
 const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
-
+const gnoDevs = ['aeddi', 'ajnavarro', 'albttx', 'alexiscolin', 'carlopezzuto', 'deelawn', 'gfanton', 'ilgooz',
+    'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'leohhhn', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
+    'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'wyhaines', 'x1unix', 'zivkovicmilos'];
+    
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
     const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log",
@@ -24,6 +27,10 @@ function main() {
         console.log("\n              Total: " + total);
         console.log("             Oldest: " + oldest.toISOString());
     }
+
+    result = showGnoPRs();
+    console.log("\n Total: " + result.total);
+    console.log("Oldest: " + result.oldest.toISOString());
 }
 
 /**
@@ -47,26 +54,8 @@ function showIssues(repo, header) {
         }
     }
 
-    let text = fs.readFileSync(repo + ".issues.json", 'utf8');
-    const blankResult = "[\n\n]\n";
-    if (text.endsWith(blankResult))
-        // The second fetched "page" of issues is blank.
-        text = text.substring(0, text.length - blankResult.length);
-    // Replace the boundary between two pages of results.
-    text = text.replaceAll('\n]\n[\n', ',\n');
-    if (text == "")
-        text = "[]";
-    const issues = JSON.parse(text);
-
-    text = fs.readFileSync(repo + ".pulls.json", 'utf8');
-    if (text.endsWith(blankResult))
-        // The second fetched "page" of issues is blank.
-        text = text.substring(0, text.length - blankResult.length);
-    // Replace the boundary between two pages of results.
-    text = text.replaceAll('\n]\n[\n', ',\n');    
-    if (text == "")
-        text = "[]";
-    const pulls = JSON.parse(text);
+    const issues = readJsonFile(repo + ".issues.json");
+    const pulls = readJsonFile(repo + ".pulls.json");
 
     let total = 0;
     let now = new Date();
@@ -183,6 +172,136 @@ function showIssues(repo, header) {
     }
 
     return { total: total, oldest: oldest}
+}
+
+function showGnoPRs() {
+    const repo = "gno";
+    console.log("\n" + repo);
+
+    const issues = readJsonFile(repo + ".issues.json");
+    const pulls = readJsonFile(repo + ".pulls.json");
+
+    let total = 0;
+    let now = new Date();
+    let oldest = now;
+    let fetchMessages = "";
+    for (const issue of issues) {
+        const isReviewTeam = hasLabel(issue, "review team");
+
+        const isPullRequest = (issue.pull_request !== undefined);
+        if (!isPullRequest)
+            continue;
+          const url = "https://github.com/" + "gnolang" + "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
+
+        const user = issue.user.login;
+        const createdAt = new Date(issue.created_at);
+        const updatedAt = new Date(issue.updated_at);
+        let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
+        let pull = null;
+        let isDraft = false;
+        if (isPullRequest) {
+            pull = getPull(pulls, issue.number);
+            if (pull == null)
+                // (We don't expect this.)
+                console.log("  WARNING: Can't find pull request detail: " + url);
+            else {
+                isDraft = pull.draft;
+            }
+        }
+        const message = url + " ".repeat(4 - ("" + issue.number).length) +
+            (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
+            String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
+            issue.comments + " cmts, " + user + ", " + issue.title;
+
+        if (isDraft) {
+            if (isReviewTeam)
+                console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review team' label");
+            continue;
+        }
+        if (gnoDevs.includes(user)) {
+            if (isReviewTeam)
+                console.log(message + "\n  WARNING: #" + issue.number + " was created by a Gno dev but has the 'review team' label");
+            continue;
+        }
+
+        // Check if a Gno dev has commented.
+        let hasGnoIssueComment = false;
+        {
+           const comments = readJsonFile(repo + ".issue-comments/" + issue.number + ".json");
+            for (const comment of comments) {
+                if (gnoDevs.includes(comment.user.login)) {
+                    hasGnoIssueComment = true;
+                    break;
+                }
+            }
+        }
+        let hasGnoPullComment = false;
+        {
+            const comments = readJsonFile(repo + ".pull-comments/" + issue.number + ".json");
+            for (const comment of comments) {
+                if (gnoDevs.includes(comment.user.login)) {
+                    hasGnoPullComment = true;
+                    break;
+                }
+            }
+        }
+        let hasGnoPullReview = false;
+        {
+            const comments = readJsonFile(repo + ".pull-reviews/" + issue.number + ".json");
+            for (const comment of comments) {
+                if (gnoDevs.includes(comment.user.login)) {
+                    hasGnoPullReview = true;
+                    break;
+                }
+            }
+        }
+
+        if (hasGnoIssueComment || hasGnoPullComment || hasGnoPullReview) {
+            if (isReviewTeam)
+                console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoPullReview ? "reviewed" : "commented") + " by a Gno dev but has the 'review team' label");
+            continue;
+        }
+        else {
+            if (!isReviewTeam) {
+                // Need to know if a new comment is from a Gno dev.
+                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/issues/' + issue.number + '/comments" > ' + repo + '.issue-comments/' + issue.number + '.json';
+                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/comments" > ' + repo + '.pull-comments/' + issue.number + '.json';
+                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/reviews" > ' + repo + '.pull-reviews/' + issue.number + '.json';
+            }
+        }
+
+        ++total;
+
+        if (createdAt < oldest)
+            oldest = createdAt;
+
+        console.log(message);
+
+        if (!isReviewTeam)
+            console.log("  WARNING: #" + issue.number + " doesn't have the 'review team' label");
+    }
+
+    console.log(fetchMessages);
+
+    return { total: total, oldest: oldest}
+}
+
+function readJsonFile(filePath) {
+    let text = "";
+    try {
+        text = fs.readFileSync(filePath, 'utf8');
+    } catch (e) {
+        return [];
+    }
+    const blankResult = "[\n\n]\n";
+    if (text.endsWith(blankResult))
+        // The second fetched "page" of issues is blank.
+        text = text.substring(0, text.length - blankResult.length);
+    // Replace the boundary between two pages of results.
+    text = text.replaceAll('\n]\n[\n', ',\n');
+    if (text == "")
+        text = "[]";
+    return JSON.parse(text);
 }
 
 function getPull(pulls, number) {
