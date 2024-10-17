@@ -191,27 +191,29 @@ function showGnoPRs() {
         const isPullRequest = (issue.pull_request !== undefined);
         if (!isPullRequest)
             continue;
-          const url = "https://github.com/" + "gnolang" + "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
+        const url = "https://github.com/" + "gnolang" + "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
 
         const user = issue.user.login;
         const createdAt = new Date(issue.created_at);
         const updatedAt = new Date(issue.updated_at);
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
-        let pull = null;
-        let isDraft = false;
-        if (isPullRequest) {
-            pull = getPull(pulls, issue.number);
-            if (pull == null)
-                // (We don't expect this.)
-                console.log("  WARNING: Can't find pull request detail: " + url);
-            else {
-                isDraft = pull.draft;
-            }
-        }
         const message = url + " ".repeat(4 - ("" + issue.number).length) +
             (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
             String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
             issue.comments + " cmts, " + user + ", " + issue.title;
+
+        let isDraft = false;
+        if (isPullRequest) {
+            const pull = getPull(pulls, issue.number);
+            if (pull == null) {
+                // (We don't expect this.)
+                console.log(message + "\n  WARNING: Can't find pull request detail: " + url);
+                continue;
+            }
+            else {
+                isDraft = pull.draft;
+            }
+        }
 
         if (isDraft) {
             if (isReviewTriagePending)
