@@ -186,7 +186,7 @@ function showGnoPRs() {
     let oldest = now;
     let fetchMessages = "";
     for (const issue of issues) {
-        const isReviewTeam = hasLabel(issue, "review team");
+        const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
 
         const isPullRequest = (issue.pull_request !== undefined);
         if (!isPullRequest)
@@ -214,13 +214,13 @@ function showGnoPRs() {
             issue.comments + " cmts, " + user + ", " + issue.title;
 
         if (isDraft) {
-            if (isReviewTeam)
-                console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review team' label");
+            if (isReviewTriagePending)
+                console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
             continue;
         }
         if (gnoDevs.includes(user)) {
-            if (isReviewTeam)
-                console.log(message + "\n  WARNING: #" + issue.number + " was created by a Gno dev but has the 'review team' label");
+            if (isReviewTriagePending)
+                console.log(message + "\n  WARNING: #" + issue.number + " was created by a Gno dev but has the 'review/triage-pending' label");
             continue;
         }
 
@@ -257,12 +257,12 @@ function showGnoPRs() {
         }
 
         if (hasGnoIssueComment || hasGnoPullComment || hasGnoPullReview) {
-            if (isReviewTeam)
-                console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoPullReview ? "reviewed" : "commented") + " by a Gno dev but has the 'review team' label");
+            if (isReviewTriagePending)
+                console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoPullReview ? "reviewed" : "commented") + " by a Gno dev but has the 'review/triage-pending' label");
             continue;
         }
         else {
-            if (!isReviewTeam) {
+            if (!isReviewTriagePending) {
                 // Need to know if a new comment is from a Gno dev.
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/issues/' + issue.number + '/comments" > ' + repo + '.issue-comments/' + issue.number + '.json';
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/comments" > ' + repo + '.pull-comments/' + issue.number + '.json';
@@ -277,8 +277,8 @@ function showGnoPRs() {
 
         console.log(message);
 
-        if (!isReviewTeam)
-            console.log("  WARNING: #" + issue.number + " doesn't have the 'review team' label");
+        if (!isReviewTriagePending)
+            console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
     }
 
     console.log(fetchMessages);
