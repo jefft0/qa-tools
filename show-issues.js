@@ -5,6 +5,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 const gnoDevs = ['aeddi', 'ajnavarro', 'albttx', 'alexiscolin', 'carlopezzuto', 'deelawn', 'gfanton', 'ilgooz',
     'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'leohhhn', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
     'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'wyhaines', 'x1unix', 'zivkovicmilos'];
+const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon'];
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
@@ -226,46 +227,60 @@ function showGnoPRs() {
             continue;
         }
 
-        // Check if a Gno dev has commented.
-        let hasGnoIssueComment = false;
+        let hasGnoDevIssueComment = false;
         {
            const comments = readJsonFile(repo + ".issue-comments/" + issue.number + ".json");
             for (const comment of comments) {
                 if (gnoDevs.includes(comment.user.login)) {
-                    hasGnoIssueComment = true;
+                    hasGnoDevIssueComment = true;
                     break;
                 }
             }
         }
-        let hasGnoPullComment = false;
+        let hasGnoDevPullComment = false;
         {
             const comments = readJsonFile(repo + ".pull-comments/" + issue.number + ".json");
             for (const comment of comments) {
                 if (gnoDevs.includes(comment.user.login)) {
-                    hasGnoPullComment = true;
+                    hasGnoDevPullComment = true;
                     break;
                 }
             }
         }
-        let hasGnoPullReview = false;
+        let hasGnoDevPullReview = false;
         {
             const comments = readJsonFile(repo + ".pull-reviews/" + issue.number + ".json");
             for (const comment of comments) {
                 if (gnoDevs.includes(comment.user.login)) {
-                    hasGnoPullReview = true;
+                    hasGnoDevPullReview = true;
+                    break;
+                }
+            }
+        }
+        let hasTriageReviewerApproval = false;
+        {
+            const comments = readJsonFile(repo + ".pull-reviews/" + issue.number + ".json");
+            for (const comment of comments) {
+                if (comment.state == "APPROVED" && triageReviewers.includes(comment.user.login)) {
+                    hasTriageReviewerApproval = true;
                     break;
                 }
             }
         }
 
-        if (hasGnoIssueComment || hasGnoPullComment || hasGnoPullReview) {
+        if (hasTriageReviewerApproval) {
             if (isReviewTriagePending)
-                console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoPullReview ? "reviewed" : "commented") + " by a Gno dev but has the 'review/triage-pending' label");
+                console.log(message + "\n  WARNING: #" + issue.number + " was approved by a triage reviewer but has the 'review/triage-pending' label");
+            continue;
+        }
+        else if (hasGnoDevIssueComment || hasGnoDevPullComment || hasGnoDevPullReview) {
+            if (isReviewTriagePending)
+                console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoDevPullReview ? "reviewed" : "commented") + " by a Gno dev but has the 'review/triage-pending' label");
             continue;
         }
         else {
             if (!isReviewTriagePending) {
-                // Need to know if a new comment is from a Gno dev.
+                // Need to know if a new review is an approval or new comment is from a Gno dev.
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/issues/' + issue.number + '/comments" > ' + repo + '.issue-comments/' + issue.number + '.json';
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/comments" > ' + repo + '.pull-comments/' + issue.number + '.json';
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/reviews" > ' + repo + '.pull-reviews/' + issue.number + '.json';
