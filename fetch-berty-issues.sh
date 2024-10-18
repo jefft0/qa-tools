@@ -26,8 +26,8 @@ curl "https://api.github.com/repos/gnolang/gnonative/pulls?per_page=100&page=1" 
 curl "https://api.github.com/repos/gnolang/gnokey-mobile/issues?per_page=100&page=1" >  gnokey-mobile.issues.json
 curl "https://api.github.com/repos/gnolang/gnokey-mobile/pulls?per_page=100&page=1" >  gnokey-mobile.pulls.json
 
-curl "https://api.github.com/repos/gnolang/dsocial/issues?per_page=100&page=1" >  dsocial.issues.json
-curl "https://api.github.com/repos/gnolang/dsocial/pulls?per_page=100&page=1" >  dsocial.pulls.json
+curl "https://api.github.com/repos/gnoverse/dsocial/issues?per_page=100&page=1" >  dsocial.issues.json
+curl "https://api.github.com/repos/gnoverse/dsocial/pulls?per_page=100&page=1" >  dsocial.pulls.json
 
 curl "https://api.github.com/repos/berty/www.berty.tech/issues?per_page=100&page=1" > www.berty.tech.issues.json
 curl "https://api.github.com/repos/berty/www.berty.tech/pulls?per_page=100&page=1" > www.berty.tech.pulls.json
