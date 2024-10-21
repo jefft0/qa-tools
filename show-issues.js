@@ -26,12 +26,12 @@ function main() {
         if (total == 0)
             console.log("\n" + header + ":")
         console.log("\n              Total: " + total);
-        console.log("             Oldest: " + oldest.toISOString());
+        console.log("             Oldest: " + oldest.toISOString().substring(0, 10));
     }
 
     result = showGnoPRs();
     console.log("\n Total: " + result.total);
-    console.log("Oldest: " + result.oldest.toISOString());
+    console.log("Oldest: " + result.oldest.toISOString().substring(0, 10));
 }
 
 /**
