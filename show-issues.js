@@ -3,8 +3,8 @@ const fs = require('fs');
 const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 const gnoDevs = ['aeddi', 'ajnavarro', 'albttx', 'alexiscolin', 'carlopezzuto', 'deelawn', 'gfanton', 'ilgooz',
-    'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'leohhhn', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
-    'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'wyhaines', 'x1unix', 'zivkovicmilos'];
+    'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
+    'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'x1unix', 'zivkovicmilos'];
 const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon', 'omarsy'];
     
 function main() {
@@ -199,7 +199,7 @@ function showGnoPRs() {
         const updatedAt = new Date(issue.updated_at);
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
         const message = url + " ".repeat(4 - ("" + issue.number).length) +
-            (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
+            (isPullRequest ? "  " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
             String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
             issue.comments + " cmts, " + user + ", " + issue.title;
 
