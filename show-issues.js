@@ -5,7 +5,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 const gnoDevs = ['aeddi', 'ajnavarro', 'albttx', 'alexiscolin', 'carlopezzuto', 'deelawn', 'gfanton', 'ilgooz',
     'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
     'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'x1unix', 'zivkovicmilos'];
-const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon', 'omarsy'];
+const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy'];
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
@@ -188,6 +188,7 @@ function showGnoPRs() {
     let fetchMessages = "";
     for (const issue of issues) {
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
+        const isStale = hasLabel(issue, "stale");
 
         const isPullRequest = (issue.pull_request !== undefined);
         if (!isPullRequest)
@@ -296,6 +297,8 @@ function showGnoPRs() {
 
         if (!isReviewTriagePending)
             console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
+        if (isStale)
+            console.log("  NOTE: #" + issue.number + " has the 'stale' label");
     }
 
     console.log(fetchMessages);
