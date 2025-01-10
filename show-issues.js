@@ -188,7 +188,7 @@ function showGnoPRs() {
     let fetchMessages = "";
     for (const issue of issues) {
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
-        const isStale = hasLabel(issue, "stale");
+        const isStale = hasLabel(issue, "Stale");
 
         const isPullRequest = (issue.pull_request !== undefined);
         if (!isPullRequest)
@@ -201,7 +201,7 @@ function showGnoPRs() {
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
         const message = url + " ".repeat(4 - ("" + issue.number).length) +
             (isPullRequest ? "  " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
-            String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
+            (isStale ? "STALE " : "") + String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
             issue.comments + " cmts, " + user + ", " + issue.title;
 
         let isDraft = false;
@@ -297,8 +297,6 @@ function showGnoPRs() {
 
         if (!isReviewTriagePending)
             console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
-        if (isStale)
-            console.log("  NOTE: #" + issue.number + " has the 'stale' label");
     }
 
     console.log(fetchMessages);
