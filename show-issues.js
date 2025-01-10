@@ -5,7 +5,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
 const gnoDevs = ['aeddi', 'ajnavarro', 'albttx', 'alexiscolin', 'carlopezzuto', 'deelawn', 'gfanton', 'ilgooz',
     'jaekwon', 'jeronimoalbi', 'Kouteki', 'kristovatlas', 'ltzmaxwell', 'mazzy89', 'michelleellen', 'moul', 'mvertes',
     'n2p5', 'petar-dambovaliev', 'piux2', 'salmad3', 'sw360cab', 'thehowl', 'x1unix', 'zivkovicmilos'];
-const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy'];
+const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'wyhaines'];
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
