@@ -9,7 +9,7 @@ const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', '
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
-    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log",
+    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "ui-components",
                    "gnonative", "gnokey-mobile", "dsocial", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
 
     for (const header of headers) {
