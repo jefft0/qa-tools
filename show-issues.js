@@ -230,16 +230,6 @@ function showGnoPRs() {
             continue;
         }
 
-        let hasGnoDevIssueComment = false;
-        {
-           const comments = readJsonFile(repo + ".issue-comments/" + issue.number + ".json");
-            for (const comment of comments) {
-                if (coreDevs.includes(comment.user.login)) {
-                    hasGnoDevIssueComment = true;
-                    break;
-                }
-            }
-        }
         let hasGnoDevPullComment = false;
         {
             const comments = readJsonFile(repo + ".pull-comments/" + issue.number + ".json");
@@ -276,7 +266,7 @@ function showGnoPRs() {
                 console.log(message + "\n  WARNING: #" + issue.number + " was approved by a triage reviewer but has the 'review/triage-pending' label");
             continue;
         }
-        else if (hasGnoDevIssueComment || hasGnoDevPullComment || hasGnoDevPullReview) {
+        else if (hasGnoDevPullComment || hasGnoDevPullReview) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " was " + (hasGnoDevPullReview ? "reviewed" : "commented") + " by a core dev but has the 'review/triage-pending' label");
             continue;
@@ -284,7 +274,6 @@ function showGnoPRs() {
         else {
             if (!isReviewTriagePending) {
                 // Need to know if a new review is an approval or new comment is from a core dev.
-                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/issues/' + issue.number + '/comments" > ' + repo + '.issue-comments/' + issue.number + '.json';
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/comments" > ' + repo + '.pull-comments/' + issue.number + '.json';
                 fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/reviews" > ' + repo + '.pull-reviews/' + issue.number + '.json';
             }
