@@ -216,6 +216,8 @@ function showGnoPRs() {
             }
             else {
                 isDraft = pull.draft;
+                if (pull.base.ref != "master")
+                    continue;
             }
         }
 
