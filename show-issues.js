@@ -4,7 +4,7 @@ const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff
 const coreDevs = ['aeddi', 'ajnavarro', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki', 'kristovatlas',
-    'ltzmaxwell', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'petar-dambovaliev', 'piux2', 'sw360cab',
+    'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'petar-dambovaliev', 'piux2', 'stackdump', 'sw360cab',
     'thehowl', 'zivkovicmilos'];
 // Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, alexiscolin, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
 const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'wyhaines', 'x1unix'];
