@@ -3,10 +3,10 @@ const fs = require('fs');
 const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
-const coreDevs = ['aeddi', 'ajnavarro', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki', 'kristovatlas',
+const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki',
     'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'stackdump', 'sw360cab',
     'thehowl', 'zivkovicmilos'];
-// Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, alexiscolin, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
+// Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
 const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'wyhaines', 'x1unix'];
     
 function main() {
