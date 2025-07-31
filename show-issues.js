@@ -242,24 +242,18 @@ function showGnoPRs() {
                 }
             }
         }
+        let hasApproval = false;
         let hasGnoDevPullReview = false;
-        {
-            const comments = readJsonFile(repo + ".pull-reviews/" + issue.number + ".json");
-            for (const comment of comments) {
-                if (coreDevs.includes(comment.user.login)) {
-                    hasGnoDevPullReview = true;
-                    break;
-                }
-            }
-        }
         let hasTriageReviewerApproval = false;
         {
             const comments = readJsonFile(repo + ".pull-reviews/" + issue.number + ".json");
             for (const comment of comments) {
-                if (comment.state == "APPROVED" && triageReviewers.includes(comment.user.login)) {
+                if (comment.state == "APPROVED")
+                    hasApproval = true;
+                if (coreDevs.includes(comment.user.login))
+                    hasGnoDevPullReview = true;
+                if (comment.state == "APPROVED" && triageReviewers.includes(comment.user.login))
                     hasTriageReviewerApproval = true;
-                    break;
-                }
             }
         }
 
@@ -288,8 +282,13 @@ function showGnoPRs() {
 
         console.log(message);
 
-        if (!isReviewTriagePending)
-            console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
+        if (!isReviewTriagePending) {
+            if (hasApproval)
+                // If approved by a dev or review member, we did continue above.
+                console.log("  WARNING: #" + issue.number + " was approved by an UNRECOGNIZED user and doesn't have the 'review/triage-pending' label");
+            else
+                console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
+        }
     }
 
     console.log(fetchMessages);
