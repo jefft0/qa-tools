@@ -7,7 +7,7 @@ const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jae
     'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'stackdump', 'sw360cab',
     'thehowl', 'zivkovicmilos'];
 // Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
-const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'wyhaines', 'x1unix'];
+const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'x1unix'];
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
