@@ -307,8 +307,8 @@ function readJsonFile(filePath) {
         return [];
     }
     const blankResult = "[\n\n]\n";
-    if (text.endsWith(blankResult))
-        // The second fetched "page" of issues is blank.
+    while (text.endsWith(blankResult))
+        // The ending fetched "page" of issues is blank.
         text = text.substring(0, text.length - blankResult.length);
     // Replace the boundary between two pages of results.
     text = text.replaceAll('\n]\n[\n', ',\n');
