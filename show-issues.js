@@ -312,8 +312,9 @@ function showGnoPRs() {
     console.log("\n Total: " + total);
     console.log("Oldest: " + oldest.toISOString().substring(0, 10));
 
-    console.log(fetchMessages);
-    console.log("* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
+    if (fetchMessages != "")
+        console.log(fetchMessages);
+    console.log("\n* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
 }
 
 function readJsonFile(filePath) {
