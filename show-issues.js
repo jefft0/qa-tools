@@ -196,6 +196,7 @@ function showGnoPRs() {
     let oldest = now;
     let fetchMessages = "";
     let contributorDraftPRs = "";
+    let contributorDraftPRsTotal = 0;
     for (const issue of issues) {
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
@@ -232,9 +233,12 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
-            if (!gnolangMembers.includes(user))
+            if (!gnolangMembers.includes(user)) {
                 // A "contributor" is any user who is not a gnolang member
-                contributorDraftPRs += message + "\n";
+                ++contributorDraftPRsTotal;
+                // Prepend for reverse order
+                contributorDraftPRs = message + "\n" + contributorDraftPRs;
+            }
             continue;
         }
         if (coreDevs.includes(user)) {
@@ -309,7 +313,7 @@ function showGnoPRs() {
     console.log("Oldest: " + oldest.toISOString().substring(0, 10));
 
     console.log(fetchMessages);
-    console.log("Contributor draft PRs\n" + contributorDraftPRs);
+    console.log("* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
 }
 
 function readJsonFile(filePath) {
