@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const staff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
+const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki',
@@ -8,6 +8,15 @@ const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jae
     'thehowl', 'zivkovicmilos'];
 // Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
 const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'x1unix'];
+// gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
+const gnolangMembers = ['adr-sk', 'adrianakalpa', 'aeddi', 'agherasie', 'AidarItkulov', 'ajnavarro', 'albttx', 'alexiscolin',
+    'clockworkgr', 'costinberty', 'D4ryl00', 'Davphla', 'DIGIX666', 'dongwon8247', 'gfanton', 'gno-bot', 'Gno2D2', 'gnodiva',
+    'harryoh', 'hthieu1110', 'ilgooz', 'irreverentsimplicity', 'iuricmp', 'jaekwon', 'jefft0', 'jeronimoalbi', 'jinoosss', 'jmsamv',
+    'juntaepark', 'kazai777', 'Kouteki', 'lbrown2007', 'lennyvong', 'leohhhn', 'ltzmaxwell', 'luciorubeens', 'MalekLahbib',
+    'masonmcbride', 'mazzy89', 'michelleellen', 'MikaelVallenet', 'Molaryy', 'moul', 'moul-bot', 'moul-sudo', 'mous1985',
+    'mvertes', 'n0izn0iz', 'n2p5', 'notJoon', 'omarsy', 'omniwired', 'onlyhyde', 'piux2', 'r3v4s', 'RezaRahemtola', 'roje1',
+    'salmad3', 'schollz', 'seancaseo', 'stackdump', 'sw360cab', 'tbruyelle', 'tfrg', 'thehowl', 'Ticojohnny', 'tolelom',
+    'Villaquiranm', 'WaDadidou', 'zivkovicmilos', 'zxxma'];
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
@@ -31,9 +40,7 @@ function main() {
         console.log("             Oldest: " + oldest.toISOString().substring(0, 10));
     }
 
-    result = showGnoPRs();
-    console.log("\n Total: " + result.total);
-    console.log("Oldest: " + result.oldest.toISOString().substring(0, 10));
+    showGnoPRs();
 }
 
 /**
@@ -144,7 +151,7 @@ function showIssues(repo, header) {
                     (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
                     String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
                     issue.comments + " cmts, " + user + ", " + issue.title);
-        if (assignee && !staff.includes(assignee))
+        if (assignee && !bertyStaff.includes(assignee))
           console.log("  WARNING: #" + issue.number + " is assigned to non staff member " + assignee);
         if (showBacklogOrDraft) {
             if (isBacklogOrDraft && isMoreInfoNeeded)
@@ -188,6 +195,7 @@ function showGnoPRs() {
     let now = new Date();
     let oldest = now;
     let fetchMessages = "";
+    let contributorDraftPRs = "";
     for (const issue of issues) {
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
@@ -224,6 +232,9 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
+            if (!gnolangMembers.includes(user))
+                // A "contributor" is any user who is not a gnolang member
+                contributorDraftPRs += message + "\n";
             continue;
         }
         if (coreDevs.includes(user)) {
@@ -294,9 +305,11 @@ function showGnoPRs() {
         }
     }
 
-    console.log(fetchMessages);
+    console.log("\n Total: " + total);
+    console.log("Oldest: " + oldest.toISOString().substring(0, 10));
 
-    return { total: total, oldest: oldest}
+    console.log(fetchMessages);
+    console.log("Contributor draft PRs\n" + contributorDraftPRs);
 }
 
 function readJsonFile(filePath) {
