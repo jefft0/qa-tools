@@ -21,7 +21,7 @@ const gnolangMembers = ['adr-sk', 'adrianakalpa', 'aeddi', 'agherasie', 'AidarIt
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
     const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "ui-components",
-                   "gnonative", "gnokey-mobile", "dsocial", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
+                   "gnonative", "gnokey-mobile", "dsocial", "boards2-mobile", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
 
     for (const header of headers) {
         let total = 0;

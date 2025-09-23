@@ -32,6 +32,9 @@ curl "https://api.github.com/repos/gnolang/gnokey-mobile/pulls?per_page=100&page
 curl "https://api.github.com/repos/gnoverse/dsocial/issues?per_page=100&page=1" >  dsocial.issues.json
 curl "https://api.github.com/repos/gnoverse/dsocial/pulls?per_page=100&page=1" >  dsocial.pulls.json
 
+curl "https://api.github.com/repos/gnoverse/boards2-mobile/issues?per_page=100&page=1" >  boards2-mobile.issues.json
+curl "https://api.github.com/repos/gnoverse/boards2-mobile/pulls?per_page=100&page=1" >  boards2-mobile.pulls.json
+
 curl "https://api.github.com/repos/berty/www.berty.tech/issues?per_page=100&page=1" > www.berty.tech.issues.json
 curl "https://api.github.com/repos/berty/www.berty.tech/pulls?per_page=100&page=1" > www.berty.tech.pulls.json
 
