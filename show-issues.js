@@ -4,7 +4,7 @@ const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integra
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki',
-    'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'stackdump', 'sw360cab',
+    'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'sw360cab',
     'thehowl', 'zivkovicmilos'];
 // Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
 const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'x1unix'];
@@ -15,7 +15,7 @@ const gnolangMembers = ['adr-sk', 'adrianakalpa', 'aeddi', 'agherasie', 'AidarIt
     'juntaepark', 'kazai777', 'Kouteki', 'lbrown2007', 'lennyvong', 'leohhhn', 'ltzmaxwell', 'luciorubeens', 'MalekLahbib',
     'masonmcbride', 'mazzy89', 'michelleellen', 'MikaelVallenet', 'Molaryy', 'moul', 'moul-bot', 'moul-sudo', 'mous1985',
     'mvertes', 'n0izn0iz', 'n2p5', 'notJoon', 'omarsy', 'omniwired', 'onlyhyde', 'piux2', 'r3v4s', 'RezaRahemtola', 'roje1',
-    'salmad3', 'schollz', 'seancaseo', 'stackdump', 'sw360cab', 'tbruyelle', 'tfrg', 'thehowl', 'Ticojohnny', 'tolelom',
+    'salmad3', 'schollz', 'seancaseo', 'sw360cab', 'tbruyelle', 'tfrg', 'thehowl', 'Ticojohnny', 'tolelom',
     'Villaquiranm', 'WaDadidou', 'zivkovicmilos', 'zxxma'];
     
 function main() {
