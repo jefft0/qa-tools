@@ -7,7 +7,7 @@ const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jae
     'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'sw360cab',
     'thehowl', 'zivkovicmilos'];
 // Not in https://github.com/orgs/gnolang/teams/tech-staff : albttx, carlopezzuto, deelawn, jeronimoalbi, mazzy89, salmad3
-const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy', 'x1unix'];
+const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = ['adr-sk', 'adrianakalpa', 'aeddi', 'agherasie', 'AidarItkulov', 'ajnavarro', 'albttx', 'alexiscolin',
     'clockworkgr', 'costinberty', 'D4ryl00', 'Davphla', 'DIGIX666', 'dongwon8247', 'gfanton', 'gno-bot', 'Gno2D2', 'gnodiva',
