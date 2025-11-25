@@ -3,16 +3,15 @@ const fs = require('fs');
 const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
-const coreDevs = ['aeddi', 'ajnavarro', 'alexiscolin', 'gfanton', 'ilgooz', 'jaekwon', 'Kouteki',
-    'ltzmaxwell', 'masonmcbride', 'michelleellen', 'moul', 'mvertes', 'n2p5', 'piux2', 'sw360cab',
-    'thehowl', 'zivkovicmilos'];
+const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
+    'gfanton', 'Kouteki', 'zivkovicmilos', 'michelleellen'];
 const triageReviewers = ['jefft0', 'leohhhn', 'n0izn0iz', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
-const gnolangMembers = ['adr-sk',
+const gnolangMembers = [
+    'adr-sk',
     'adrianakalpa',
     'aeddi',
     'agherasie',
-    'AidarItkulov',
     'ajnavarro',
     'albttx',
     'alexiscolin',
@@ -28,7 +27,6 @@ const gnolangMembers = ['adr-sk',
     'gnodiva',
     'harryoh',
     'hthieu1110',
-    'ilgooz',
     'irreverentsimplicity',
     'iuricmp',
     'jaekwon',
@@ -41,12 +39,8 @@ const gnolangMembers = ['adr-sk',
     'Kouteki',
     'lbrown2007',
     'lennyvong',
-    'leohhhn',
     'ltzmaxwell',
-    'luciorubeens',
     'MalekLahbib',
-    'masonmcbride',
-    'mazzy89',
     'michelleellen',
     'MikaelVallenet',
     'Molaryy',
@@ -55,18 +49,14 @@ const gnolangMembers = ['adr-sk',
     'moul-bot',
     'moul-sudo',
     'mous1985',
-    'mvertes',
     'n0izn0iz',
-    'n2p5',
     'notJoon',
     'omarsy',
     'omniwired',
     'onlyhyde',
-    'piux2',
     'r3v4s',
     'RezaRahemtola',
     'roje1',
-    'salmad3',
     'schollz',
     'seancaseo',
     'sw360cab',
@@ -260,6 +250,7 @@ function showGnoPRs() {
     let contributorDraftPRs = "";
     let contributorDraftPRsTotal = 0;
     for (const issue of issues) {
+        if (issue.number == 3963) continue; // Until closed.
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
 
@@ -295,6 +286,7 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
+            if ([2833, 3725, 4064, 4333, 4364, 4415, 4489, 4526, 4725, 4816].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
             if (!gnolangMembers.includes(user)) {
                 // A "contributor" is any user who is not a gnolang member
                 ++contributorDraftPRsTotal;
