@@ -3,7 +3,7 @@ const fs = require('fs');
 const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
-const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
+const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
     'gfanton', 'Kouteki', 'zivkovicmilos', 'michelleellen'];
 const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
