@@ -248,7 +248,6 @@ function showGnoPRs() {
     let contributorDraftPRs = "";
     let contributorDraftPRsTotal = 0;
     for (const issue of issues) {
-        if (issue.number == 3963) continue; // Until closed.
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
 
