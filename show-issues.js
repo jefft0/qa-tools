@@ -9,7 +9,6 @@ const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
-    'adrianakalpa',
     'aeddi',
     'agherasie',
     'ajnavarro',
@@ -58,7 +57,6 @@ const gnolangMembers = [
     'RezaRahemtola',
     'roje1',
     'schollz',
-    'seancaseo',
     'sw360cab',
     'tbruyelle',
     'tfrg',
