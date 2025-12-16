@@ -284,6 +284,7 @@ function showGnoPRs() {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
             if ([2833, 3725, 4064, 4333, 4364, 4415, 4489, 4526, 4725, 4816].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
+            if (user == "Copilot") continue;
             if (!gnolangMembers.includes(user)) {
                 // A "contributor" is any user who is not a gnolang member
                 ++contributorDraftPRsTotal;
