@@ -5,7 +5,7 @@ const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integra
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
     'gfanton', 'Kouteki', 'zivkovicmilos', 'michelleellen'];
-const triageReviewers = ['jefft0', 'n0izn0iz', 'notJoon', 'omarsy'];
+const triageReviewers = ['jefft0', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
@@ -328,8 +328,11 @@ function showGnoPRs() {
         }
 
         if (hasTriageReviewerApproval) {
-            if (isReviewTriagePending)
+            if (isReviewTriagePending) {
+                // Need to know if a new review is an approval or new comment is from a core dev.
+                fetchMessages = appendFetchMessages(fetchMessages, repo, issue.number);
                 console.log(message + "\n  WARNING: #" + issue.number + " was approved by a triage reviewer but has the 'review/triage-pending' label");
+            }
             continue;
         }
         else if (hasGnoDevPullComment || hasGnoDevPullReview) {
@@ -340,8 +343,7 @@ function showGnoPRs() {
         else {
             if (!isReviewTriagePending) {
                 // Need to know if a new review is an approval or new comment is from a core dev.
-                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/comments" > ' + repo + '.pull-comments/' + issue.number + '.json';
-                fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issue.number + '/reviews" > ' + repo + '.pull-reviews/' + issue.number + '.json';
+                fetchMessages = appendFetchMessages(fetchMessages, repo, issue.number);
             }
         }
 
@@ -367,6 +369,12 @@ function showGnoPRs() {
     if (fetchMessages != "")
         console.log(fetchMessages);
     console.log("\n* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
+}
+
+function appendFetchMessages(fetchMessages, repo, issueNumber) {
+    fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issueNumber + '/comments" > ' + repo + '.pull-comments/' + issueNumber + '.json';
+    fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issueNumber + '/reviews" > ' + repo + '.pull-reviews/' + issueNumber + '.json';
+    return fetchMessages;
 }
 
 function readJsonFile(filePath) {
