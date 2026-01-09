@@ -5,7 +5,7 @@ const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integra
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
     'gfanton', 'Kouteki', 'zivkovicmilos', 'michelleellen'];
-const triageReviewers = ['jefft0', 'notJoon', 'omarsy'];
+const triageReviewers = ['jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
@@ -330,7 +330,7 @@ function showGnoPRs() {
         if (hasTriageReviewerApproval) {
             if (isReviewTriagePending) {
                 // Need to know if a new review is an approval or new comment is from a core dev.
-                fetchMessages = appendFetchMessages(fetchMessages, repo, issue.number);
+                fetchMessages += makeFetchMessages(repo, issue.number);
                 console.log(message + "\n  WARNING: #" + issue.number + " was approved by a triage reviewer but has the 'review/triage-pending' label");
             }
             continue;
@@ -343,7 +343,7 @@ function showGnoPRs() {
         else {
             if (!isReviewTriagePending) {
                 // Need to know if a new review is an approval or new comment is from a core dev.
-                fetchMessages = appendFetchMessages(fetchMessages, repo, issue.number);
+                fetchMessages += makeFetchMessages(repo, issue.number);
             }
         }
 
@@ -371,8 +371,8 @@ function showGnoPRs() {
     console.log("\n* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
 }
 
-function appendFetchMessages(fetchMessages, repo, issueNumber) {
-    fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issueNumber + '/comments" > ' + repo + '.pull-comments/' + issueNumber + '.json';
+function makeFetchMessages(repo, issueNumber) {
+    fetchMessages =  '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issueNumber + '/comments" > ' + repo + '.pull-comments/' + issueNumber + '.json';
     fetchMessages += '\ncurl "https://api.github.com/repos/gnolang/' + repo + '/pulls/' + issueNumber + '/reviews" > ' + repo + '.pull-reviews/' + issueNumber + '.json';
     return fetchMessages;
 }
