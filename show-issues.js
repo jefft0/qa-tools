@@ -3,8 +3,8 @@ const fs = require('fs');
 const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
-const coreDevs = ['jaekwon', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin',
-    'gfanton', 'Kouteki', 'zivkovicmilos', 'dongwon8247', 'michelleellen'];
+const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'Kouteki', 'zivkovicmilos', 'dongwon8247', 'michelleellen'];
 const triageReviewers = ['jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
@@ -236,12 +236,23 @@ function showGnoPRs() {
             continue;
         const url = "https://github.com/" + "gnolang" + "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
 
+        let milestone = " ";
+        if (issue.milestone) {
+            // Follow https://github.com/gnolang/gno/milestones
+            if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/7")
+                milestone = "MS1 ";
+            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/12")
+                milestone = "MS2 ";
+            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/13")
+                milestone = "MS3 ";
+        }
+
         const user = issue.user.login;
         const createdAt = new Date(issue.created_at);
         const updatedAt = new Date(issue.updated_at);
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
-        const message = url + " ".repeat(4 - ("" + issue.number).length) +
-            (isPullRequest ? "  " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
+        const message = url + " ".repeat(4 - ("" + issue.number).length) + " " + milestone +
+            createdAt.toISOString().substring(0, 10) + ", " +
             (isStale ? "STALE " : "") + String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
             issue.comments + " cmts, " + user + ", " + issue.title;
 
@@ -263,7 +274,7 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
-            if ([2833, 3725, 4064, 4333, 4364, 4415, 4489, 4526, 4725, 4816].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
+            if ([2833, 2843, 3815, 4064, 4333, 4364, 4415, 4489, 4526, 4697, 4725, 4775, 4816].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
             if (user == "Copilot") continue;
             if (!gnolangMembers.includes(user)) {
                 // A "contributor" is any user who is not a gnolang member
@@ -341,6 +352,8 @@ function showGnoPRs() {
             else
                 console.log("  WARNING: #" + issue.number + " doesn't have the 'review/triage-pending' label");
         }
+        if (milestone != " " && isStale)
+            console.log("  WARNING: #" + issue.number + " is stale but is on milestone " + milestone);
     }
 
     console.log("\n Total: " + total);
