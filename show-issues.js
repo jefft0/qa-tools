@@ -36,7 +36,6 @@ const gnolangMembers = [
     'moul-sudo',
     'notJoon',
     'omarsy',
-    'omniwired',
     'roje1',
     'sw360cab',
     'tbruyelle',
@@ -51,7 +50,7 @@ const gnolangMembers = [
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
     const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "ui-components",
-                   "gnonative", "gnokey-mobile", "dsocial", "boards2-mobile", "www.berty.tech", "www.wesh.network", "gomobile-ipfs"];
+                   "gnonative", "gnokey-mobile", "dsocial", "boards2-mobile", "www.berty.tech", "www.wesh.network"];
 
     for (const header of headers) {
         let total = 0;
@@ -111,7 +110,7 @@ function showIssues(repo, header) {
         const isVerified = hasLabel(issue, "verified");
         const isMoreInfoNeeded = hasLabel(issue, "more info needed");
         const url = "https://github.com/" + 
-            (repo == "gomobile-ipfs" ? "ipfs-shipyard" : (repo == "gnonative" || repo == "gnokey-mobile" ? "gnolang" : (repo == "dsocial" || repo == "boards2-mobile" ? "gnoverse" : "berty"))) + 
+            (repo == "gnonative" || repo == "gnokey-mobile" ? "gnolang" : (repo == "dsocial" || repo == "boards2-mobile" ? "gnoverse" : "berty")) + 
             "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
 
         const user = issue.user.login;
