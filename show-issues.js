@@ -4,7 +4,7 @@ const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integra
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'Kouteki', 'zivkovicmilos', 'dongwon8247', 'michelleellen'];
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'Kouteki', 'dongwon8247', 'michelleellen'];
 const triageReviewers = ['jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
@@ -44,7 +44,6 @@ const gnolangMembers = [
     'Ticojohnny',
     'Villaquiranm',
     'WaDadidou',
-    'zivkovicmilos',
     'zxxma'];
     
 function main() {
@@ -273,7 +272,7 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
-            if ([2833, 2843, 3815, 4064, 4333, 4364, 4415, 4489, 4526, 4697, 4725, 4775, 4816].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
+            if ([2843, 3999, 4064, 4068, 4333, 4415, 4489, 4526, 4697, 4725, 4775, 4816, 4946].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
             if (user == "Copilot") continue;
             if (!gnolangMembers.includes(user)) {
                 // A "contributor" is any user who is not a gnolang member
