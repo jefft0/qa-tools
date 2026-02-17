@@ -16,7 +16,7 @@ const gnolangMembers = [
     'clockworkgr',
     'costinberty',
     'D4ryl00',
-    'Davphla',
+    'davd-gzl',
     'dongwon8247',
     'gfanton',
     'Gno2D2',
