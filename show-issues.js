@@ -239,10 +239,12 @@ function showGnoPRs() {
             // Follow https://github.com/gnolang/gno/milestones
             if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/7")
                 milestone = "MS1 ";
-            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/12")
+            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/14")
                 milestone = "MS2 ";
-            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/13")
+            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/12")
                 milestone = "MS3 ";
+            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/13")
+                milestone = "MS4 ";
         }
 
         const user = issue.user.login;
