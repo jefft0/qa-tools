@@ -68,6 +68,7 @@ function main() {
         console.log("             Oldest: " + oldest.toISOString().substring(0, 10));
     }
 
+    showNextAfterMainnetBeta();
     showGnoPRs();
 }
 
@@ -177,7 +178,7 @@ function showIssues(repo, header) {
         const daysRemaining = (isMoreInfoNeeded ? String(Math.max(0, Math.ceil(21 - daysSinceUpdate))).padStart(2, '0') + "d " : "")
         console.log(daysRemaining + category + " " + url + " ".repeat(4 - ("" + issue.number).length) +
                     (isPullRequest ? "   " : " ") + createdAt.toISOString().substring(0, 10) + ", " +
-                    String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
+                    String(Math.ceil(daysSinceUpdate)).padStart(2, ' ') + "d idle, " +
                     issue.comments + " cmts, " + user + ", " + issue.title);
         if (assignee && !bertyStaff.includes(assignee))
           console.log("  WARNING: #" + issue.number + " is assigned to non staff member " + assignee);
@@ -210,6 +211,43 @@ function showIssues(repo, header) {
     }
 
     return { total: total, oldest: oldest}
+}
+
+
+function showNextAfterMainnetBeta() {
+    const repo = "gno";
+    console.log("\nNext After Mainnet Beta");
+
+    const issues = readJsonFile(repo + ".issues.json");
+
+    let total = 0;
+    let now = new Date();
+    let messages = [];
+    for (const issue of issues) {
+        // Follow https://github.com/gnolang/gno/milestones
+        if (!(issue.milestone && issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/12"))
+            continue;
+
+        const isPullRequest = (issue.pull_request !== undefined);
+        const url = "https://github.com/" + "gnolang" + "/" + repo + (isPullRequest ? "/pull/" : "/issues/") + issue.number;
+
+        const user = issue.user.login;
+        const createdAt = new Date(issue.created_at);
+        const updatedAt = new Date(issue.updated_at);
+        let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
+        const message = String(Math.ceil(daysSinceUpdate)).padStart(4, ' ') + "d idle, " +
+            url + " ".repeat(4 - ("" + issue.number).length) + (isPullRequest ? "   " : " ") +
+            createdAt.toISOString().substring(0, 10) + ", " +
+            issue.comments + " cmts, " + user + ", " + issue.title;
+        messages.push(message);
+        ++total;
+    }
+
+    messages.sort();
+    for (const message of messages)
+        console.log(message);
+
+    console.log("\n Total: " + total);
 }
 
 function showGnoPRs() {
@@ -253,7 +291,7 @@ function showGnoPRs() {
         let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
         const message = url + " ".repeat(4 - ("" + issue.number).length) + " " + milestone +
             createdAt.toISOString().substring(0, 10) + ", " +
-            (isStale ? "STALE " : "") + String(Math.ceil(daysSinceUpdate)).padStart(2, '0') + "d idle, " +
+            (isStale ? "STALE " : "") + String(Math.ceil(daysSinceUpdate)).padStart(2, ' ') + "d idle, " +
             issue.comments + " cmts, " + user + ", " + issue.title;
 
         let isDraft = false;
