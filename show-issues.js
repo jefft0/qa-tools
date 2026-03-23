@@ -234,11 +234,15 @@ function showNextAfterMainnetBeta() {
         const user = issue.user.login;
         const createdAt = new Date(issue.created_at);
         const updatedAt = new Date(issue.updated_at);
-        let daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
-        const message = String(Math.ceil(daysSinceUpdate)).padStart(4, ' ') + "d idle, " +
+        const daysSinceUpdate = (now - updatedAt) / (1000 * 3600 * 24);
+        const assignee = (issue.assignee ? issue.assignee.login : null);
+        let message = String(Math.ceil(daysSinceUpdate)).padStart(3, ' ') + "d idle, " +
             url + " ".repeat(4 - ("" + issue.number).length) + (isPullRequest ? "   " : " ") +
             createdAt.toISOString().substring(0, 10) + ", " +
             issue.comments + " cmts, " + user + ", " + issue.title;
+        if (assignee && !gnolangMembers.includes(assignee))
+          message += "\n  WARNING: #" + issue.number + " is assigned to non-member " + assignee;
+
         messages.push(message);
         ++total;
     }
