@@ -25,6 +25,7 @@ const gnolangMembers = [
     'jefft0',
     'jeronimoalbi',
     'jinoosss',
+    'julienrbrt',
     'Kouteki',
     'lbrown2007',
     'ltzmaxwell',
