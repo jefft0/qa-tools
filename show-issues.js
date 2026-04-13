@@ -26,7 +26,6 @@ const gnolangMembers = [
     'jeronimoalbi',
     'jinoosss',
     'julienrbrt',
-    'Kouteki',
     'lbrown2007',
     'ltzmaxwell',
     'michelleellen',
@@ -35,6 +34,7 @@ const gnolangMembers = [
     'moul',
     'moul-bot',
     'moul-sudo',
+    'nemanjantic',
     'notJoon',
     'omarsy',
     'roje1',
@@ -42,7 +42,6 @@ const gnolangMembers = [
     'tbruyelle',
     'tfrg',
     'thehowl',
-    'Ticojohnny',
     'Villaquiranm',
     'WaDadidou',
     'zxxma'];
