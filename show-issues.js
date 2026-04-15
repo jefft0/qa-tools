@@ -4,8 +4,8 @@ const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integra
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
 const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'Kouteki', 'dongwon8247', 'michelleellen'];
-const triageReviewers = ['davd-gzl', 'jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic', 'michelleellen'];
+const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
