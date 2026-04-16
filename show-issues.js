@@ -2,9 +2,9 @@ const fs = require('fs');
 
 const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
     "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
-// coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff plus michelleellen
+// coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff
 const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic', 'michelleellen'];
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic'];
 const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
@@ -265,8 +265,6 @@ function showGnoPRs() {
     let now = new Date();
     let oldest = now;
     let fetchMessages = "";
-    let contributorDraftPRs = "";
-    let contributorDraftPRsTotal = 0;
     for (const issue of issues) {
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
@@ -316,14 +314,6 @@ function showGnoPRs() {
         if (isDraft) {
             if (isReviewTriagePending)
                 console.log(message + "\n  WARNING: #" + issue.number + " is draft but has the 'review/triage-pending' label");
-            if ([2843, 3999, 4068, 4489, 4526, 4697, 4725, 4775, 4816, 4946, 4954].includes(issue.number)) continue; // Ignore these from former gnolangMembers (until closed)
-            if (user == "Copilot") continue;
-            if (!gnolangMembers.includes(user)) {
-                // A "contributor" is any user who is not a gnolang member
-                ++contributorDraftPRsTotal;
-                // Prepend for reverse order
-                contributorDraftPRs = message + "\n" + contributorDraftPRs;
-            }
             continue;
         }
         if (coreDevs.includes(user)) {
@@ -403,7 +393,6 @@ function showGnoPRs() {
 
     if (fetchMessages != "")
         console.log(fetchMessages);
-    console.log("\n* Contributor draft PRs\n" + contributorDraftPRs + "  Total: " + contributorDraftPRsTotal);
 }
 
 function makeFetchMessages(repo, issueNumber) {
