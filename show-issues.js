@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-const bertyStaff = ["costinberty", "D4ryl00", "dependabot[bot]", "dework-integration[bot]",
-    "gfanton", "iuricmp", "jefft0",  "moul", "berty-assistant"];
-// coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff
+const bertyStaff = ['D4ryl00', 'dependabot[bot]', 'dework-integration[bot]',
+    'gfanton', 'jefft0',  'moul', 'berty-assistant'];
+// coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff + lbrown2007
 const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic'];
-const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'MikaelVallenet', 'notJoon', 'omarsy'];
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic', 'lbrown2007'];
+const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'MikaelVallenet', 'mvallenet', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
@@ -29,11 +29,11 @@ const gnolangMembers = [
     'louis14448',
     'ltzmaxwell',
     'michelleellen',
-    'MikaelVallenet',
     'moonia',
     'moul',
     'moul-bot',
     'moul-sudo',
+    'mvallenet',
     'nemanjantic',
     'notJoon',
     'omarsy',
@@ -179,6 +179,7 @@ function showIssues(repo, header) {
                     String(Math.ceil(daysSinceUpdate)).padStart(2, ' ') + "d idle, " +
                     issue.comments + " cmts, " + user + ", " + issue.title);
         if (assignee && !bertyStaff.includes(assignee))
+          if (issue.number != 127) // temporary until resolved
           console.log("  WARNING: #" + issue.number + " is assigned to non staff member " + assignee);
         if (showBacklogOrDraft) {
             if (isBacklogOrDraft && isMoreInfoNeeded)
