@@ -17,6 +17,9 @@ curl "https://api.github.com/repos/berty/go-orbit-db/pulls?per_page=100&page=1" 
 curl "https://api.github.com/repos/berty/go-ipfs-log/issues?per_page=100&page=1" > go-ipfs-log.issues.json
 curl "https://api.github.com/repos/berty/go-ipfs-log/pulls?per_page=100&page=1" > go-ipfs-log.pulls.json
 
+curl "https://api.github.com/repos/berty/go-ipfs-repo-encrypted/issues?per_page=100&page=1" > go-ipfs-repo-encrypted.issues.json
+curl "https://api.github.com/repos/berty/go-ipfs-repo-encrypted/pulls?per_page=100&page=1" > go-ipfs-repo-encrypted.pulls.json
+
 curl "https://api.github.com/repos/berty/ui-components/issues?per_page=100&page=1" > ui-components.issues.json
 curl "https://api.github.com/repos/berty/ui-components/pulls?per_page=100&page=1" > ui-components.pulls.json
 

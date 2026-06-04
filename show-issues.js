@@ -4,7 +4,7 @@ const bertyStaff = ['D4ryl00', 'dependabot[bot]', 'dework-integration[bot]',
     'gfanton', 'jefft0',  'moul', 'berty-assistant'];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff + lbrown2007
 const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'nemanjantic', 'lbrown2007'];
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'lbrown2007'];
 const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
@@ -32,7 +32,6 @@ const gnolangMembers = [
     'moul',
     'moul-bot',
     'moul-sudo',
-    'nemanjantic',
     'notJoon',
     'omarsy',
     'sw360cab',
@@ -44,7 +43,7 @@ const gnolangMembers = [
     
 function main() {
     const headers = ["NEEDS QA ATTENTION", "MORE INFO NEEDED", "HAS DEV FOCUS", "BACKLOG OR DRAFT"]
-    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "ui-components",
+    const repos = ["berty", "weshnet", "weshnet-expo", "weshnet-expo-examples", "go-orbit-db", "go-ipfs-log", "go-ipfs-repo-encrypted", "ui-components",
                    "gnonative", "gnokey-mobile", "dsocial", "boards2-mobile", "www.berty.tech", "www.wesh.network"];
 
     for (const header of headers) {
