@@ -3,14 +3,14 @@ const fs = require('fs');
 const bertyStaff = ['D4ryl00', 'dependabot[bot]', 'dework-integration[bot]',
     'gfanton', 'jefft0',  'moul', 'berty-assistant'];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff + lbrown2007
-const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'jeronimoalbi', 'ajnavarro', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'lbrown2007'];
+const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'sw360cab', 'thehowl',
+    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'lbrown2007',
+    /* former */ 'jeronimoalbi', 'ajnavarro'];
 const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
     'adr-sk',
     'aeddi',
-    'ajnavarro',
     'albttx',
     'alexiscolin',
     'aronpark1007',
@@ -22,7 +22,6 @@ const gnolangMembers = [
     'Gno2D2',
     'jaekwon',
     'jefft0',
-    'jeronimoalbi',
     'jinoosss',
     'julienrbrt',
     'lbrown2007',
