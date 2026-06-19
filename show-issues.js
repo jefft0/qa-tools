@@ -260,7 +260,7 @@ function showGnoPRs() {
     let oldest = now;
     let fetchMessages = "";
     for (const issue of issues) {
-        if ([4886, 5756].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
+        if ([4886, 5016, 5756].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
 
@@ -272,14 +272,12 @@ function showGnoPRs() {
         let milestone = " ";
         if (issue.milestone) {
             // Follow https://github.com/gnolang/gno/milestones
-            if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/7")
+            if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/14")
                 milestone = "MS1 ";
-            else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/14")
-                milestone = "MS2 ";
             else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/12")
-                milestone = "MS3 ";
+                milestone = "MS2 ";
             else if (issue.milestone.html_url == "https://github.com/gnolang/gno/milestone/13")
-                milestone = "MS4 ";
+                milestone = "MS3 ";
         }
 
         const user = issue.user.login;
