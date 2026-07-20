@@ -258,7 +258,7 @@ function showGnoPRs() {
     let oldest = now;
     let fetchMessages = "";
     for (const issue of issues) {
-        if ([4886, 5531, 5756].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
+        if ([4886, 5756, 5598].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
 
