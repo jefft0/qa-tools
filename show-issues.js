@@ -3,8 +3,8 @@ const fs = require('fs');
 const bertyStaff = ['D4ryl00', 'dependabot[bot]', 'dework-integration[bot]',
     'gfanton', 'jefft0',  'moul', 'berty-assistant'];
 // coreDevs should track https://github.com/orgs/gnolang/teams/tech-staff + lbrown2007
-const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'thehowl',
-    'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247', 'lbrown2007', /* former: */ 'jeronimoalbi', 'ajnavarro'];
+const coreDevs = ['jaekwon', 'tbruyelle', 'moul', 'thehowl', 'aeddi', 'ltzmaxwell', 'alexiscolin', 'gfanton', 'dongwon8247',
+    'lbrown2007', /* former: */ 'jeronimoalbi', 'ajnavarro'];
 const triageReviewers = ['aronpark1007', 'davd-gzl', 'jefft0', 'notJoon', 'omarsy'];
 // gnolangMembers overlaps with coreDevs and triageReviewers. Should track https://github.com/orgs/gnolang/people
 const gnolangMembers = [
@@ -18,6 +18,7 @@ const gnolangMembers = [
     'davd-gzl',
     'dongwon8247',
     'gfanton',
+    'giunatale',
     'Gno2D2',
     'jaekwon',
     'jefft0',
@@ -258,7 +259,7 @@ function showGnoPRs() {
     let oldest = now;
     let fetchMessages = "";
     for (const issue of issues) {
-        if ([4886, 5756, 5598].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
+        if ([4886].includes(issue.number)) continue; // Already approved by a former core dev or member of triageReviewers. Ignore until closed/merged.
         const isReviewTriagePending = hasLabel(issue, "review/triage-pending");
         const isStale = hasLabel(issue, "Stale");
 
